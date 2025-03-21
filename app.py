@@ -3,6 +3,8 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 import subprocess
 
@@ -19,10 +21,18 @@ start_time = time.time()
 try:
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.get(URL)
-    
-    time.sleep(3)
 
-    # 🚀 Faster PDF Link Extraction
+    # 🚀 Wait up to 10 seconds for at least one PDF link to load
+    try:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "a[href$='.pdf']"))
+        )
+    except:
+        print("Timeout: No PDF links found within 10 seconds.")
+        driver.quit()
+        exit(0)
+
+    # 🚀 Extract PDF Links Faster
     pdf_links = [elem.get_attribute("href") for elem in driver.find_elements(By.CSS_SELECTOR, "a[href$='.pdf']")]
 
     driver.quit()

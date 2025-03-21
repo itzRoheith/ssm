@@ -45,8 +45,8 @@ try:
 except Exception as e:
     print(f"Error occurred: {e}")
 
-finally:
-    try:
-        driver.quit()  
-    except NameError:
-        pass
+# finally:
+#     try:
+#         driver.quit()  
+#     except NameError:
+#         pass

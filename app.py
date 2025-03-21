@@ -13,13 +13,16 @@ options.add_argument("--headless")
 options.add_argument("--disable-gpu")
 options.add_argument("--no-sandbox")
 
+# Start the timer
+start_time = time.time()
+
 try:
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.get(URL)
     
     time.sleep(3)
 
-    # 🚀 Faster link extraction
+    # 🚀 Faster PDF Link Extraction
     pdf_links = [elem.get_attribute("href") for elem in driver.find_elements(By.CSS_SELECTOR, "a[href$='.pdf']")]
 
     driver.quit()
@@ -42,3 +45,8 @@ finally:
         driver.service.process.kill()
     except NameError:
         pass
+
+# Stop the timer and print execution time
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"Code finished in {elapsed_time:.2f} seconds")

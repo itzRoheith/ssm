@@ -39,6 +39,7 @@ try:
         subprocess.run(["gitcommit.cmd"], check=True)
     if pdf_links == []:
         print("No PDF links found.")
+        exit(0)
     
 
 except Exception as e:

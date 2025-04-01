@@ -16,14 +16,14 @@ jobs:
           server_port: 587
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
-          subject: "🚀 New Commit in Your Repo!"
+          subject: "🚀 New File Released on Parental Portal"
           to: "itz.rth@gmail.com"
-          from: "GitHub Notifications"
+          from: "SSM BOT"
           body: |
-            A new commit was pushed to your repository!
+            A New File has been released on the Parental Portal!
+            📅 **Date:** ${{ github.event.head_commit.timestamp }}
             
             📢 **Message:** ${{ github.event.head_commit.message }}
-            🔗 **View Commit:** https://github.com/${{ github.repository }}/commit/${{ github.sha }}
-
+            🔗 **View Updates in** https://github.com/itzRoheith/ssm
             ✅ *You are receiving this notification automatically via GitHub Actions!*
           content_type: text/markdown

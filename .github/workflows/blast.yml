@@ -1,0 +1,29 @@
+name: Notify via Email on Commit
+
+on:
+  push:
+    branches:
+      - main  # Change this if needed
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          username: ${{ secrets.EMAIL_USERNAME }}
+          password: ${{ secrets.EMAIL_PASSWORD }}
+          subject: "🚀 New Commit in Your Repo!"
+          to: "itz.rth@gmail.com"
+          from: "GitHub Notifications"
+          body: |
+            A new commit was pushed to your repository!
+            
+            📢 **Message:** ${{ github.event.head_commit.message }}
+            🔗 **View Commit:** https://github.com/${{ github.repository }}/commit/${{ github.sha }}
+
+            ✅ *You are receiving this notification automatically via GitHub Actions!*
+          content_type: text/markdown

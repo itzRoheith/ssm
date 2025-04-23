@@ -17,7 +17,7 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "🚀 New File Released on Parental Portal"
-          to: "itz.rth@gmail.com"
+          to: "prasaath@gmail.com"
           from: "SSM BOT"
           body: |
             A New File has been released on the Parental Portal!
